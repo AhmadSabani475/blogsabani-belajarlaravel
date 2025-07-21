@@ -14,11 +14,23 @@ Route::get('/posts', function () {
     return view("posts", ['title' => 'Blog Page', 'posts' => $posts]);
 });
 Route::get('/authors/{user:username}', function (User $user) {
-    return view("posts", ['title' => count($user->posts) . ' Article By. ' . $user->name, 'posts' => $user->posts]);
+    $posts = $user->posts()->latest()->filter(request(['search', 'category']))->paginate(6)->withQueryString();
+
+    return view("posts", [
+        'title' => $posts->total() . ' Article By. ' . $user->name,
+        'posts' => $posts
+    ]);
 });
+
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view("posts", ['title' => 'Category : ' . $category->name, 'posts' => $category->posts]);
+    $posts = $category->posts()->latest()->filter(request(['search', 'author']))->paginate(6)->withQueryString();
+
+    return view("posts", [
+        'title' => 'Category : ' . $category->name,
+        'posts' => $posts
+    ]);
 });
+
 Route::get('posts/{post:slug}', function (Post $post) {
     return view("post", ['title' => 'Single Post', 'post' => $post]);
 });
@@ -28,11 +40,6 @@ Route::get('/about', function () {
 Route::get('/contak', function () {
     return view("contak", ['title' => 'Contak Page']);
 });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [PostDashboardController::class, 'index'])->name('dashboard');
     Route::post('/dashboard', [PostDashboardController::class, 'store']);
