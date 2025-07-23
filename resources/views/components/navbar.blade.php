@@ -23,7 +23,7 @@
 
                             <!-- Profile dropdown -->
                             <div class="relative ml-3">
-                                <div >
+                                <div>
                                     @if (Auth::check())
                                         <button type="button" @click = "isOpen =  !isOpen"
                                             class="cursor-pointer relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
