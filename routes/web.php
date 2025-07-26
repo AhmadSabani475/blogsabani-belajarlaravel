@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 Route::get('/', function () {
-    return view('home', ['title' => 'Home Page']);
+    return view('home', ['title' => 'Home Page', 'posts' => Post::latest()->paginate(3)]);
 });
 Route::get('/posts', function () {
     $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(6)->withQueryString();

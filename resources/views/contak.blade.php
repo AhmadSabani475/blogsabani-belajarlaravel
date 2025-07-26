@@ -1,3 +1,4 @@
 <x-layout :title=$title>
-    <p>This Is Contak Page</p>
+    <x-home.contacts />
+    <x-footer />
 </x-layout>

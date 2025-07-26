@@ -26,10 +26,10 @@
                     <x-my-nav-link href="/" :current="request()->is('/')">Home</x-my-nav-link>
                 </li>
                 <li>
-                    <x-my-nav-link href="/posts" :current="request()->is('posts')">Blog</x-my-nav-link>
+                    <x-my-nav-link href="/about" :current="request()->is('about')">About</x-my-nav-link>
                 </li>
                 <li>
-                    <x-my-nav-link href="/about" :current="request()->is('about')">About</x-my-nav-link>
+                    <x-my-nav-link href="/posts" :current="request()->is('posts')">Blog</x-my-nav-link>
                 </li>
                 <li>
                     <x-my-nav-link href="/contak" :current="request()->is('contak')">Contak</x-my-nav-link>
